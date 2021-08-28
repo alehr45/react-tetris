@@ -16,7 +16,8 @@ import StartButton from "./StartButton";
 const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
-  const [player, updatePlayerPos, resetPlayer] = usePlayer();
+
+  const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage] = useStage(player, resetPlayer);
 
   console.log("re-render");
@@ -36,16 +37,16 @@ const Tetris = () => {
 
   const drop = () => {
     if (!checkCollision(player, stage, { x: 0, y: 1 })) {
-      updatePlayerPos({ x: 0, y: 1, collided: false })
-  } else {
+      updatePlayerPos({ x: 0, y: 1, collided: false });
+    } else {
       if (player.pos.y < 1) {
-          console.log('Game over');
-          setGameOver(true);
-          setDropTime(null);
+        console.log("Game over");
+        setGameOver(true);
+        setDropTime(null);
       }
-      updatePlayerPos({ x: 0, y: 0, collided: true })
-  }
-}
+      updatePlayerPos({ x: 0, y: 0, collided: true });
+    }
+  };
 
   const dropPlayer = () => {
     drop();
@@ -59,7 +60,10 @@ const Tetris = () => {
         movePlayer(1);
       } else if (keyCode === 40) {
         dropPlayer();
+      } else if (keyCode === 38) {
+        playerRotate(stage, 1);
       }
+      
     }
   };
 
