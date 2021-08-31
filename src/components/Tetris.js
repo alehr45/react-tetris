@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { createStage, checkCollision } from "../gameHelpers";
+import ReactAudioPlayer from "react-audio-player";
+import Song from "../font/Tetris.mp3";
 
 //Styled Components
 import { StyledTetrisWrapper, StyledTetris } from "./styles/StyledTetris";
@@ -117,6 +119,7 @@ const Tetris = () => {
           <StartButton callback={startGame} />
         </aside>
       </StyledTetris>
+      {/* <audio src={Song} loop autoplay controls /> */}
     </StyledTetrisWrapper>
   );
 };
